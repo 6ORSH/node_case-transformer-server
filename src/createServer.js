@@ -4,10 +4,17 @@ const { getResponseData } = require('./getResponseData');
 function createServer() {
   const server = http.createServer((request, response) => {
     response.setHeader('Content-Type', 'application/json');
-    response.statusCode = 200;
+
+    if (request.method !== 'GET') {
+      response.statusCode = 404;
+      response.end('Not Found');
+
+      return server;
+    }
 
     const responseData = getResponseData(request.url);
 
+    response.statusCode = 200;
     response.write(JSON.stringify(responseData));
     response.end();
   });
