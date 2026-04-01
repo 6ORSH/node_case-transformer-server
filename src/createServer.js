@@ -14,8 +14,8 @@ function createServer() {
 
     const responseData = getResponseData(request.url);
 
-    response.statusCode = 200;
     response.write(JSON.stringify(responseData));
+    response.statusCode = 200;
     response.end();
   });
 
