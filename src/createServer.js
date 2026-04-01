@@ -1,5 +1,5 @@
 const http = require('http');
-const { getResponseData } = require('./getResponseData');
+const { getResponseData } = require('./getResponseData.js');
 
 function createServer() {
   const server = http.createServer((request, response) => {
@@ -14,8 +14,15 @@ function createServer() {
 
     const responseData = getResponseData(request.url);
 
+    if (responseData.errors) {
+      response.statusCode = 400;
+      response.statusMessage = 'Bad request';
+    } else {
+      response.statusCode = 200;
+      response.statusMessage = 'OK';
+    }
+
     response.write(JSON.stringify(responseData));
-    response.statusCode = 200;
     response.end();
   });
 
