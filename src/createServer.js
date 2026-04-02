@@ -7,7 +7,7 @@ function createServer() {
 
     if (request.method !== 'GET') {
       response.statusCode = 404;
-      response.end('Not Found');
+      response.end(JSON.stringify({ message: 'Not Found' }));
 
       return server;
     }

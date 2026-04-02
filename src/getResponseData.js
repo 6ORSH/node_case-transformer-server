@@ -23,8 +23,6 @@ function getResponseData(url) {
     errors.push({ message: MISSING_TEXT_ERROR });
   }
 
-  const originalCase = detectCase(originalText);
-
   const params = new URLSearchParams(queryString);
   const targetCase = params.get('toCase');
 
@@ -41,6 +39,8 @@ function getResponseData(url) {
 
     return result;
   }
+
+  const originalCase = detectCase(originalText);
 
   const { convertedText } = convertToCase(originalText, targetCase);
 
